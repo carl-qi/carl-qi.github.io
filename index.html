@@ -8,6 +8,28 @@
   
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 	<link rel="shortcut icon" href="images/seal_icon.png" type="image/vnd.microsoft.icon">
+  <style>
+    .pub-toggle-btn {
+      display: inline-block;
+      padding: 4px 14px;
+      margin: 0 4px;
+      border: 1.5px solid #999;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      background: #fff;
+      color: #555;
+      transition: background 0.15s, color 0.15s;
+      user-select: none;
+    }
+    .pub-toggle-btn.active {
+      background: #444;
+      color: #fff;
+      border-color: #444;
+    }
+    .extra-pub { display: table-row; }
+    .extra-pub.hidden { display: none !important; }
+  </style>
 </head>
 
 <body>
@@ -69,7 +91,56 @@
             </td>
           </tr>
         </tbody></table>
+        <!-- Preprints section -->
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr>
+            <td style="padding:20px;width:100%;vertical-align:middle">
+              <heading>Preprints</heading>
+            </td>
+          </tr>
+        </tbody></table>
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr onmouseout="malle_stop()" onmouseover="malle_start()">
+            <td style="padding:20px;width:30%;vertical-align:middle">
+              <img style="width:105%;max-width:105%" src="images/vllr_2026.png">
+            </td>
+            <td style="padding:20px;width:70%;vertical-align:middle">
+              <a href="https://silongyong.github.io/vllr_project_page/">
+                <papertitle>VLLR: Generalizable Dense Reward for Long-Horizon Robotic Tasks</papertitle>
+              </a>
+              <br>
+              Silong Yong,
+              Stephen Sheng,
+              <strong>Carl Qi</strong>,
+              Xiaojie Wang,
+              Evan Sheehan,
+              Anurag Shivaprasad,
+              Yaqi Xie,
+              Katia Sycara,
+              Yesh Dattatreya
+              <br>
+              <em>Preprint, 2026</em>
+              <br>
+              <a href="https://arxiv.org/abs/2604.00055">Paper</a>
+              /
+              <a href="https://silongyong.github.io/vllr_project_page/">Project Page</a>
+              <p></p>
+            </td>
+          </tr>
+        </tbody></table>
+
+        <!-- Publications section -->
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          <tr>
+            <td style="padding:20px;width:100%;vertical-align:middle">
+              <heading>Publications</heading>
+              &nbsp;&nbsp;
+              <span id="btn-selected" class="pub-toggle-btn" onclick="setPubView('selected')">Selected</span>
+              <span id="btn-all" class="pub-toggle-btn active" onclick="setPubView('all')">All</span>
+            </td>
+          </tr>
+        </tbody></table>
+        <table id="pub-table" style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           <tr onmouseout="malle_stop()" onmouseover="malle_start()" >
             <td style="padding:20px;width:30%;vertical-align:middle">
               <img style="width:105%;max-width:105%" src="images/armor.png">
@@ -108,7 +179,7 @@
             </td>
           </tr>
 
-          <tr onmouseout="malle_stop()" onmouseover="malle_start()" >
+          <tr class="extra-pub" onmouseout="malle_stop()" onmouseover="malle_start()" >
             <td style="padding:20px;width:30%;vertical-align:middle">
               <img style="width:105%;max-width:105%" src="images/hecrl.gif">
               <script type="text/javascript">
@@ -144,7 +215,7 @@
               <p></p>
             </td>
           </tr>
-          <tr onmouseout="malle_stop()" onmouseover="malle_start()">
+          <tr class="extra-pub" onmouseout="malle_stop()" onmouseover="malle_start()">
             <td style="padding:20px;width:30%;vertical-align:middle">
               <img style="width:105%;max-width:105%" src="images/lpwm.png">
               <script type="text/javascript">
@@ -218,7 +289,7 @@
             </td>
           </tr>
           </tr>
-          <tr onmouseout="malle_stop()" onmouseover="malle_start()">
+          <tr class="extra-pub" onmouseout="malle_stop()" onmouseover="malle_start()">
             <td style="padding:20px;width:30%;vertical-align:middle">
               <img style="width:105%;max-width:105%" src="images/null.png">
               <script type="text/javascript">
@@ -402,7 +473,7 @@
               <a href="https://www.cs.cmu.edu/news/2022/robots-roll-dough">[CMU SCS News (robots roll dough)]</a>
               </td>
           </tr>
-          <tr onmouseout="malle_stop()" onmouseover="malle_start()">
+          <tr class="extra-pub" onmouseout="malle_stop()" onmouseover="malle_start()">
             <td style="padding:50px;width:30%;vertical-align:middle">
               <img style="width:80%;max-width:80%" src="images/2020_implant.gif">
             </td>
@@ -421,7 +492,6 @@
               <p></p>
             </td>
           </tr>
-
         </tbody></table>
 
 				
@@ -475,6 +545,22 @@
       </td>
     </tr>
   </table>
+  <script>
+    function setPubView(mode) {
+      var extras = Array.prototype.slice.call(document.querySelectorAll('.extra-pub'));
+      var btnSelected = document.getElementById('btn-selected');
+      var btnAll = document.getElementById('btn-all');
+      if (mode === 'all') {
+        extras.forEach(function(el) { el.classList.remove('hidden'); });
+        btnAll.classList.add('active');
+        btnSelected.classList.remove('active');
+      } else {
+        extras.forEach(function(el) { el.classList.add('hidden'); });
+        btnSelected.classList.add('active');
+        btnAll.classList.remove('active');
+      }
+    }
+  </script>
 </body>
 
 </html>
