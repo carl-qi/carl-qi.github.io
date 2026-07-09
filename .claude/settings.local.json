@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "WebFetch(domain:silongyong.github.io)",
-      "Bash(curl -s -o /scratch/cluster/carlq/personal/carl-qi.github.io/images/vllr.png \"https://silongyong.github.io/images/Research/reward.png\")",
-      "Bash(wget -q -O /scratch/cluster/carlq/personal/carl-qi.github.io/images/vllr.png https://silongyong.github.io/images/Research/reward.png)"
-    ]
-  }
-}
